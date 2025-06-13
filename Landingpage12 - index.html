@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futuro da Logística | Plataforma Tech Avançada</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn.abacus.ai/images/d29e7879-22d3-4bc9-85d6-440d6f249804.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    :root {
+      --tech-primary: #1ecb8b;
+      --tech-secondary: #15996a;
+      --tech-accent: #b6ffe0;
+      --tech-dark: #101820;
+      --tech-dark-2: #1a1a1a;
+      --tech-light: #fff;
+      --tech-gray: #b6c2c2;
+      --tech-glow: 0 0 20px rgba(30, 203, 139, 0.18);
+      --tech-glow-strong: 0 0 30px rgba(30, 203, 139, 0.33);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--tech-dark);
+      color: var(--tech-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 70px;
+      background: rgba(16, 24, 32, 0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(30, 203, 139, 0.10);
+      box-shadow: var(--tech-glow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      height: 38px;
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a {
+      color: var(--tech-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    nav a:hover, nav a.active {
+      color: var(--tech-primary);
+      background: rgba(30, 203, 139, 0.10);
+      box-shadow: var(--tech-glow);
+    }
+    /* MENU HAMBURGUER NAVIO */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      margin-left: 1rem;
+      z-index: 1100;
+    }
+    .nav-hamburger img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--tech-primary));
+    }
+    /* MENU MOBILE */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(16,24,32,0.97);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem 1.5rem;
+      animation: slideIn 0.3s;
+    }
+    @keyframes slideIn {
+      from { left: -100vw; }
+      to { left: 0; }
+    }
+    .nav-mobile .nav-logo {
+      margin-bottom: 2rem;
+    }
+    .nav-mobile .nav-links {
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+    .nav-mobile .nav-link {
+      font-size: 1.2rem;
+      width: 100%;
+      text-align: left;
+      padding: 1rem 0;
+    }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: var(--tech-dark-2);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.32;
+      z-index: 1;
+      filter: brightness(0.85) saturate(1.1);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 600px;
+      width: 90%;
+      background: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(30, 203, 139, 0.18);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      box-shadow: var(--tech-glow-strong);
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--tech-primary), var(--tech-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(30, 203, 139, 0.18);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--tech-gray);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .form-lead {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-lead input, .form-lead button {
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .form-lead input {
+      background: rgba(42, 42, 42, 0.8);
+      border: 1px solid rgba(30, 203, 139, 0.18);
+      color: var(--tech-light);
+    }
+    .form-lead input:focus {
+      outline: none;
+      border-color: var(--tech-primary);
+      box-shadow: var(--tech-glow);
+      background: rgba(42, 42, 42, 1);
+    }
+    .form-lead input::placeholder { color: var(--tech-gray); }
+    .form-lead button {
+      background: linear-gradient(135deg, var(--tech-primary), var(--tech-secondary));
+      border: none;
+      color: var(--tech-light);
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: var(--tech-glow);
+    }
+    .form-lead button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--tech-glow-strong);
+      background: linear-gradient(135deg, var(--tech-secondary), var(--tech-primary));
+    }
+    /* NAVIO */
+    .navio-scroll-gif {
+      position: fixed;
+      left: 2vw;
+      bottom: 2vw;
+      width: 90px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.92;
+      filter: drop-shadow(0 10px 30px rgba(30, 203, 139, 0.18));
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px);}
+      50% { transform: translateY(-10px);}
+    }
+    /* VECTOR BG ANIMADO */
+    .vector-bg {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.13;
+      pointer-events: none;
+      animation: vectorMove 18s linear infinite alternate;
+    }
+    .vector-bg.hero-vector {
+      top: 10%; left: 60%;
+      width: 420px;
+      animation-delay: 0s;
+    }
+    .vector-bg.section-vector {
+      bottom: 0; left: 0;
+      width: 340px;
+      animation-delay: 4s;
+    }
+    .vector-bg.section-vector2 {
+      top: 60%; right: 0;
+      width: 260px;
+      animation-delay: 8s;
+    }
+    @keyframes vectorMove {
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(-30px) scale(1.04);}
+    }
+    /* SEÇÕES */
+    .section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 4rem 2rem;
+      position: relative;
+      background: var(--tech-dark-2);
+      overflow: hidden;
+    }
+    .section:nth-child(even) { background: var(--tech-dark); }
+    .section-content {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+    }
+    .section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--tech-primary);
+      text-shadow: 0 0 20px rgba(30, 203, 139, 0.13);
+    }
+    .section p {
+      font-size: 1.1rem;
+      color: var(--tech-gray);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+    .section-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--tech-accent), var(--tech-primary));
+      color: var(--tech-dark);
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: var(--tech-glow);
+      border: none;
+      cursor: pointer;
+    }
+    .section-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--tech-glow-strong);
+      background: linear-gradient(135deg, var(--tech-primary), var(--tech-accent));
+    }
+    /* CARDS */
+    .diferenciais-list, .depoimentos-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .diferencial, .depoimento {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(30, 203, 139, 0.13);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .diferencial::before, .depoimento::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--tech-primary), var(--tech-accent));
+    }
+    .diferencial:hover, .depoimento:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--tech-glow);
+      border-color: var(--tech-primary);
+    }
+    .diferencial-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px rgba(30, 203, 139, 0.18));
+    }
+    .diferencial h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--tech-primary);
+      margin-bottom: 1rem;
+    }
+    .diferencial p { color: var(--tech-gray); font-size: 0.95rem; margin: 0; }
+    .depoimento {
+      text-align: left;
+      position: relative;
+      padding-left: 3rem;
+    }
+    .depoimento::after {
+      content: '"';
+      position: absolute;
+      left: 1rem; top: 1rem;
+      font-size: 4rem;
+      color: var(--tech-primary);
+      opacity: 0.13;
+      font-family: serif;
+    }
+    .depoimento-nome {
+      font-weight: 600;
+      color: var(--tech-primary);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    /* CTA FINAL */
+    .cta-final {
+      min-height: 60vh;
+      background: linear-gradient(135deg, var(--tech-dark-2), var(--tech-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .cta-final h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--tech-primary);
+      margin-bottom: 1rem;
+    }
+    .cta-final p {
+      font-size: 1.1rem;
+      color: var(--tech-gray);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+    .cta-final a {
+      display: inline-block;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+    }
+    .cta-final a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(37, 211, 102, 0.6);
+    }
+    /* FOOTER */
+    footer {
+      background: var(--tech-dark);
+      border-top: 1px solid rgba(30, 203, 139, 0.13);
+      padding: 2rem;
+      text-align: center;
+      color: var(--tech-gray);
+    }
+    .footer-btn-topo {
+      background: linear-gradient(135deg, var(--tech-primary), var(--tech-secondary));
+      color: var(--tech-dark);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--tech-glow);
+    }
+    .footer-btn-topo:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--tech-glow-strong);
+    }
+    /* POPUP DASHBOARDS */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .popup-content {
+      background: rgba(26, 26, 26, 0.98);
+      border: 1px solid rgba(30, 203, 139, 0.18);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      max-width: 1100px;
+      width: 95vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--tech-glow-strong);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: popupIn 0.3s;
+    }
+    @keyframes popupIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .popup-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--tech-primary);
+      font-size: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .popup-close:hover {
+      color: var(--tech-accent);
+      transform: scale(1.1);
+    }
+    .popup-content h2 {
+      color: var(--tech-primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .popup-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+    }
+    .popup-card {
+      background: rgba(42, 42, 42, 0.8);
+      border: 1px solid rgba(30, 203, 139, 0.13);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+    }
+    .popup-card img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .popup-card-title {
+      font-weight: 600;
+      color: var(--tech-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .popup-card-desc {
+      color: var(--tech-gray);
+      font-size: 0.9rem;
+    }
+    /* Cards de baixo ocupam 2 colunas cada */
+    .popup-card.card4 {
+      grid-column: 1 / span 2;
+      grid-row: 2;
+    }
+    .popup-card.card5 {
+      grid-column: 3 / span 1;
+      grid-row: 2;
+    }
+    @media (max-width: 900px) {
+      .popup-cards {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+      .popup-card.card4, .popup-card.card5 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+    /* RESPONSIVO */
+    @media (max-width: 900px) {
+      nav { padding: 0 1rem; }
+      .hero-content { padding: 2rem 1.5rem; }
+      .vector-bg.hero-vector { width: 220px; }
+      .vector-bg.section-vector { width: 160px; }
+      .vector-bg.section-vector2 { width: 120px; }
+      .diferenciais-list, .depoimentos-list { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      .nav-mobile { display: flex; }
+      .hero h1 { font-size: 2.2rem; }
+      .section h2 { font-size: 2rem; }
+      .section { padding: 3rem 1rem; }
+      .navio-scroll-gif { width: 60px; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-content { padding: 1.5rem 1rem; }
+      .section h2 { font-size: 1.6rem; }
+      .navio-scroll-gif { width: 38px; }
+      nav { height: auto; padding: 0.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <img src="https://cdn.abacus.ai/images/062c35b3-eb26-4706-bc9a-338a265f85a4.png" alt="Logo" class="nav-logo">
+    <ul class="nav-links">
+      <li><a href="#inicio" class="nav-link active">Início</a></li>
+      <li><a href="#como-funciona" class="nav-link">Processo</a></li>
+      <li><a href="#diferenciais" class="nav-link">Tech</a></li>
+      <li><a href="#depoimentos" class="nav-link">Resultados</a></li>
+      <li><a href="#contato" class="nav-link">Contato</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu">
+      <img src="navio.gif" alt="Menu Navio">
+    </button>
+    <div class="nav-mobile" id="navMobile">
+      <img src="https://cdn.abacus.ai/images/062c35b3-eb26-4706-bc9a-338a265f85a4.png" alt="Logo" class="nav-logo">
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link">Início</a></li>
+        <li><a href="#como-funciona" class="nav-link">Processo</a></li>
+        <li><a href="#diferenciais" class="nav-link">Tech</a></li>
+        <li><a href="#depoimentos" class="nav-link">Resultados</a></li>
+        <li><a href="#contato" class="nav-link">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Navio com flutuação -->
+  <img class="navio-scroll-gif" id="navioGif" src="navio.gif" alt="Navio Tech">
+
+  <!-- Vetores animados de fundo -->
+  <img src="https://cdn.abacus.ai/images/df1e1448-6f13-41d7-94a5-08173501dcfd.png" class="vector-bg hero-vector" alt="Vector conexões">
+  <img src="https://cdn.abacus.ai/images/df1e1448-6f13-41d7-94a5-08173501dcfd.png" class="vector-bg section-vector" alt="Vector conexões">
+  <img src="https://cdn.abacus.ai/images/df1e1448-6f13-41d7-94a5-08173501dcfd.png" class="vector-bg section-vector2" alt="Vector conexões">
+
+  <section class="hero" id="inicio">
+    <img src="https://cdn.abacus.ai/images/292b5b4e-4f00-4ae9-86ec-5a620e674fe2.png" alt="Tech Background" class="hero-bg">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+      <h1>Logística do Futuro</h1>
+      <p>Plataforma tech avançada com IA, automação e analytics em tempo real. Transforme sua operação com tecnologia de ponta.</p>
+      <form class="form-lead" id="form-lead">
+        <input type="text" placeholder="Nome completo" required>
+        <input type="email" placeholder="E-mail corporativo" required>
+        <input type="tel" placeholder="WhatsApp" required>
+        <button type="submit">Acessar Plataforma</button>
+      </form>
+      <small style="color: var(--tech-gray);">Acesso liberado após validação comercial</small>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona">
+    <div class="section-content">
+      <h2 data-aos="fade-up">Sistema Inteligente</h2>
+      <p data-aos="fade-up" data-aos-delay="200">Processo automatizado: cadastro → validação IA → acesso liberado. Nossa plataforma usa machine learning para otimizar cada etapa da sua operação logística.</p>
+      <a href="javascript:void(0)" class="section-btn" id="btn-paineis" data-aos="fade-up" data-aos-delay="400">Ver Dashboards</a>
+    </div>
+  </section>
+
+  <section class="section" id="diferenciais">
+    <div class="section-content">
+      <h2 data-aos="fade-up">Tecnologia Avançada</h2>
+      <p data-aos="fade-up" data-aos-delay="200">Stack tech completa para revolucionar sua logística:</p>
+      <div class="diferenciais-list">
+        <div class="diferencial" data-aos="fade-up" data-aos-delay="300">
+          <div class="diferencial-icon">🤖</div>
+          <h4>IA & Machine Learning</h4>
+          <p>Algoritmos preditivos para otimização automática de rotas e recursos em tempo real.</p>
+        </div>
+        <div class="diferencial" data-aos="fade-up" data-aos-delay="400">
+          <div class="diferencial-icon">📊</div>
+          <h4>Analytics Avançado</h4>
+          <p>Dashboards interativos com Big Data e visualizações em tempo real para decisões estratégicas.</p>
+        </div>
+        <div class="diferencial" data-aos="fade-up" data-aos-delay="500">
+          <div class="diferencial-icon">⚡</div>
+          <h4>API & Integração</h4>
+          <p>Conectividade total com seus sistemas via APIs REST, webhooks e microserviços escaláveis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="depoimentos">
+    <div class="section-content">
+      <h2 data-aos="fade-up">Cases de Sucesso</h2>
+      <p data-aos="fade-up" data-aos-delay="200">Empresas que já transformaram suas operações com nossa tech:</p>
+      <div class="depoimentos-list">
+        <div class="depoimento" data-aos="fade-up" data-aos-delay="300">
+          Reduzimos 40% dos custos operacionais com a IA preditiva. ROI em 3 meses. Plataforma revolucionária!
+          <div class="depoimento-nome">Carlos Silva - CTO Porto Digital</div>
+        </div>
+        <div class="depoimento" data-aos="fade-up" data-aos-delay="400">
+          Analytics em tempo real mudou nosso game. Visibilidade total da operação. Recomendo 100%!
+          <div class="depoimento-nome">Ana Costa - Head of Ops LogiTech</div>
+        </div>
+        <div class="depoimento" data-aos="fade-up" data-aos-delay="500">
+          Automação completa dos processos. Equipe focou em estratégia. Produtividade aumentou 60%.
+          <div class="depoimento-nome">João Santos - CEO SmartCargo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final" id="contato">
+    <div data-aos="fade-up">
+      <h2>Ready to Scale?</h2>
+      <p>Fale com nosso time tech e descubra como revolucionar sua operação com nossa plataforma.</p>
+      <a href="https://wa.me/559999" target="_blank">Falar com Especialista</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      © 2025 TechLogistics. Powered by AI & Advanced Analytics.
+    </div>
+    <button class="footer-btn-topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+  </footer>
+
+  <!-- POPUP DASHBOARDS -->
+  <div class="popup-overlay" id="popupPaineis">
+    <div class="popup-content">
+      <button class="popup-close" id="closePopup">&times;</button>
+      <h2>Dashboards Tech</h2>
+      <div class="popup-cards">
+        <div class="popup-card card1">
+          <img src="https://placehold.co/300x80/1ecb8b/101820?text=AI+DASHBOARD" alt="AI Dashboard">
+          <div class="popup-card-title">AI Operations</div>
+          <div class="popup-card-desc">Dashboard com IA preditiva e automação inteligente de processos.</div>
+        </div>
+        <div class="popup-card card2">
+          <img src="https://placehold.co/300x80/b6ffe0/101820?text=ANALYTICS" alt="Analytics">
+          <div class="popup-card-title">Real-time Analytics</div>
+          <div class="popup-card-desc">Métricas avançadas e KPIs em tempo real com Big Data.</div>
+        </div>
+        <div class="popup-card card3">
+          <img src="https://placehold.co/300x80/15996a/fff?text=API+HUB" alt="API Hub">
+          <div class="popup-card-title">API Integration</div>
+          <div class="popup-card-desc">Central de APIs e microserviços para integração total.</div>
+        </div>
+        <div class="popup-card card4">
+          <img src="https://placehold.co/600x80/101820/1ecb8b?text=CONTROL" alt="Control Center">
+          <div class="popup-card-title">Control Center</div>
+          <div class="popup-card-desc">Centro de comando unificado para toda a operação.</div>
+        </div>
+        <div class="popup-card card5">
+          <img src="https://placehold.co/600x80/1ecb8b/fff?text=VISUAL+OPS" alt="Visual Ops">
+          <div class="popup-card-title">Visual Ops</div>
+          <div class="popup-card-desc">Visualização operacional avançada e insights automáticos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Inicializar AOS para animar sempre que o elemento entra na tela
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: false, // <- anima sempre que entra na tela
+      mirror: true, // <- anima ao subir e descer
+      offset: 100
+    });
+
+    // Navegação ativa e rolagem suave
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let fromTop = window.scrollY + 100;
+      navLinks.forEach(link => {
+        let section = document.querySelector(link.getAttribute('href'));
+        if (section &&
+          section.offsetTop <= fromTop &&
+          section.offsetTop + section.offsetHeight > fromTop
+        ) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        // Fecha menu mobile ao clicar
+        if(window.innerWidth <= 768) {
+          document.getElementById('navMobile').style.display = 'none';
+        }
+      });
+    });
+
+    // Formulário
+    document.getElementById('form-lead').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const button = this.querySelector('button');
+      const originalText = button.textContent;
+      button.textContent = 'Processando...';
+      button.style.background = 'linear-gradient(135deg, var(--tech-accent), var(--tech-primary))';
+      setTimeout(() => {
+        button.textContent = '✓ Enviado!';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = 'linear-gradient(135deg, var(--tech-primary), var(--tech-secondary))';
+          this.reset();
+        }, 2000);
+      }, 1000);
+    });
+
+    // Menu responsivo hamburguer/navio
+    const navHamburger = document.getElementById('navHamburger');
+    const navMobile = document.getElementById('navMobile');
+    navHamburger.addEventListener('click', () => {
+      navMobile.style.display = navMobile.style.display === 'flex' ? 'none' : 'flex';
+    });
+    // Fecha menu mobile ao clicar fora
+    navMobile.addEventListener('click', (e) => {
+      if (e.target === navMobile) navMobile.style.display = 'none';
+    });
+
+    // Popup Dashboards
+    const btnPaineis = document.getElementById('btn-paineis');
+    const popup = document.getElementById('popupPaineis');
+    const closePopup = document.getElementById('closePopup');
+    btnPaineis.addEventListener('click', () => {
+      popup.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+    closePopup.addEventListener('click', () => {
+      popup.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>

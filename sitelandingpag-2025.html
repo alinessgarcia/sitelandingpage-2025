@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eSUPPLY IT - Inteligência nos Dados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://cdn.abacus.ai/images/ce60fb30-2164-48b8-bfd9-499a4830f128.png">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <style>
+    :root {
+      --green-neon: #00ff99;
+      --green-dark: #0a1f16;
+      --green-glow: 0 0 16px #00ff99, 0 0 32px #00ff9944;
+      --bg-dark: #101820;
+      --text-light: #f4f4f4;
+      --card-bg: #162626cc;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      padding: 18px 40px;
+      background: rgba(10, 31, 22, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px #00ff9944;
+      backdrop-filter: blur(6px);
+    }
+    .navbar img {
+      height: 48px;
+    }
+    .navbar nav a {
+      color: var(--green-neon);
+      text-decoration: none;
+      margin-left: 32px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+    .navbar nav a:hover {
+      color: #fff;
+      text-shadow: var(--green-glow);
+    }
+    /* Hero */
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #0a1f16cc 60%, #00ff9911 100%), url('https://cdn.abacus.ai/images/2d07808e-8a7c-42ac-83e2-4f380f27ba34.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 600px;
+      margin-right: 8vw;
+      z-index: 2;
+    }
+    .hero-content h1 {
+      font-size: 3rem;
+      color: var(--green-neon);
+      text-shadow: var(--green-glow);
+      margin-bottom: 18px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 32px;
+      color: #e0ffe0;
+      text-shadow: 0 2px 8px #00ff9944;
+    }
+    .hero-content .cta-btn {
+      background: var(--green-neon);
+      color: #101820;
+      border: none;
+      padding: 16px 38px;
+      border-radius: 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: var(--green-glow);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero-content .cta-btn:hover {
+      background: #101820;
+      color: var(--green-neon);
+      box-shadow: 0 0 32px #00ff99cc;
+      border: 2px solid var(--green-neon);
+    }
+    /* Navio decorativo */
+    .navio {
+      position: absolute;
+      left: 2vw;
+      bottom: 2vw;
+      width: 120px;
+      z-index: 1;
+      animation: floatShip 4s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+    @keyframes floatShip {
+      0%, 100% { transform: translateY(0) scale(0.85);}
+      50% { transform: translateY(-18px) scale(0.85);}
+    }
+    /* Destaque */
+    .destaque {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 80px 10vw 40px 10vw;
+      background: linear-gradient(90deg, #00ff9911 0%, #0a1f16 100%);
+    }
+    .destaque-img {
+      width: 180px;
+      max-width: 40vw;
+      filter: drop-shadow(0 0 24px #00ff9955);
+      border-radius: 18px;
+      background: #fff1;
+      padding: 12px;
+    }
+    .destaque-content {
+      max-width: 500px;
+    }
+    .destaque-content h2 {
+      color: var(--green-neon);
+      font-size: 2.1rem;
+      margin-bottom: 12px;
+      text-shadow: var(--green-glow);
+    }
+    .destaque-content p {
+      color: #e0ffe0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    /* Cards */
+    .cards-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      padding: 60px 8vw;
+      background: #101820;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 0 24px #00ff9922;
+      padding: 32px 28px;
+      width: 320px;
+      max-width: 90vw;
+      color: #fff;
+      text-align: left;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid #00ff9944;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 0 32px #00ff99cc;
+      border-color: var(--green-neon);
+    }
+    .card h3 {
+      color: var(--green-neon);
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+      text-shadow: var(--green-glow);
+    }
+    .card p {
+      color: #e0ffe0;
+      font-size: 1rem;
+    }
+    /* Footer */
+    footer {
+      background: #f4f4f4;
+      color: #101820;
+      text-align: center;
+      padding: 36px 0 16px 0;
+      margin-top: 40px;
+      position: relative;
+    }
+    .footer-logo {
+      height: 48px;
+      margin-bottom: 12px;
+    }
+    .footer-copy {
+      font-size: 1rem;
+      color: #222;
+      opacity: 0.7;
+    }
+    /* Responsivo */
+    @media (max-width: 900px) {
+      .hero-content {
+        margin-right: 2vw;
+      }
+      .destaque {
+        flex-direction: column;
+        gap: 24px;
+        padding: 60px 4vw 30px 4vw;
+      }
+      .destaque-img {
+        width: 120px;
+      }
+    }
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        padding: 12px 10px;
+      }
+      .hero {
+        padding-top: 70px;
+        min-height: 80vh;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content {
+        margin-right: 0;
+        max-width: 98vw;
+      }
+      .navio {
+        width: 70px;
+        left: 1vw;
+        bottom: 1vw;
+      }
+      .destaque {
+        padding: 36px 2vw 18px 2vw;
+      }
+      .cards-section {
+        padding: 30px 2vw;
+      }
+      .card {
+        padding: 18px 10px;
+      }
+      footer {
+        padding: 18px 0 8px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar" data-aos="fade-down">
+    <img src="https://cdn.abacus.ai/images/ce60fb30-2164-48b8-bfd9-499a4830f128.png" alt="Logo eSUPPLY IT">
+    <nav>
+      <a href="#solucoes">Soluções</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content" data-aos="fade-left">
+      <h1>Inteligência nos Dados para o seu Negócio</h1>
+      <p>Transforme informações em decisões estratégicas com tecnologia, automação e análise avançada. Soluções inteligentes para Supply Chain, Logística e muito mais.</p>
+      <a href="#contato" class="cta-btn">Fale com a gente</a>
+    </div>
+    <img src="navio.gif" alt="Navio" class="navio" data-aos="fade-up" data-aos-delay="400">
+  </section>
+  <!-- Destaque -->
+  <section class="destaque" id="solucoes">
+    <img src="https://cdn.abacus.ai/images/2d07808e-8a7c-42ac-83e2-4f380f27ba34.png" alt="Destaque" class="destaque-img" data-aos="zoom-in">
+    <div class="destaque-content" data-aos="fade-right">
+      <h2>Soluções Tech para sua Empresa</h2>
+      <p>Automatize processos, visualize dados em tempo real e otimize sua operação com nossas plataformas inteligentes. Integração fácil, dashboards interativos e insights acionáveis.</p>
+    </div>
+  </section>
+  <!-- Cards -->
+  <section class="cards-section">
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <h3>Supply Chain Inteligente</h3>
+      <p>Monitoramento, rastreabilidade e automação de ponta a ponta. Reduza custos e aumente a eficiência com tecnologia de dados.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Dashboards Personalizados</h3>
+      <p>Visualize KPIs, tendências e alertas em tempo real. Tome decisões rápidas e baseadas em dados.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <h3>Integração Total</h3>
+      <p>Conecte ERPs, TMS, WMS e outras plataformas facilmente. Dados centralizados e seguros.</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <h3>Consultoria Especializada</h3>
+      <p>Equipe experiente em dados, automação e transformação digital. Suporte completo para sua jornada tech.</p>
+    </div>
+  </section>
+  <!-- Imagem de destaque extra -->
+  <section class="destaque" id="sobre">
+    <div class="destaque-content" data-aos="fade-left">
+      <h2>Quem Somos</h2>
+      <p>Somos apaixonados por tecnologia e dados. Nossa missão é impulsionar empresas com soluções inovadoras, seguras e sob medida para cada desafio.</p>
+    </div>
+    <img src="https://cdn.abacus.ai/images/ab0d4f45-8352-459f-bc06-d577cf80e8bb.png" alt="Logo Preta" class="destaque-img" data-aos="zoom-in">
+  </section>
+  <!-- Imagem decorativa extra -->
+  <section class="destaque" style="background: #101820;">
+    <img src="9468726b-40fd-4de0-98bf-55f6ed6cf4a0.png" alt="Ilustração Tech" class="destaque-img" data-aos="zoom-in">
+    <div class="destaque-content" data-aos="fade-right">
+      <h2>Inovação e Segurança</h2>
+      <p>Utilizamos as melhores práticas de segurança e inovação para garantir que seus dados estejam sempre protegidos e gerando valor.</p>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <img src="https://cdn.abacus.ai/images/ab0d4f45-8352-459f-bc06-d577cf80e8bb.png" alt="Logo Preta" class="footer-logo">
+    <div class="footer-copy">
+      &copy; 2025 eSUPPLY IT. Todos os direitos reservados.
+    </div>
+  </footer>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 900,
+      once: true
+    });
+  </script>
+</body>
+</html>
