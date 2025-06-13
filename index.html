@@ -90,35 +90,36 @@
       filter: drop-shadow(0 0 8px var(--tech-primary));
     }
     /* MENU MOBILE */
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(16,24,32,0.97);
-      z-index: 1050;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 2rem 1.5rem;
-      animation: slideIn 0.3s;
-    }
-    @keyframes slideIn {
-      from { left: -100vw; }
-      to { left: 0; }
-    }
-    .nav-mobile .nav-logo {
-      margin-bottom: 2rem;
-    }
-    .nav-mobile .nav-links {
-      flex-direction: column;
-      gap: 1.5rem;
-      width: 100%;
-    }
-    .nav-mobile .nav-link {
-      font-size: 1.2rem;
-      width: 100%;
-      text-align: left;
-      padding: 1rem 0;
-    }
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(16,24,32,0.97);
+  z-index: 1050;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem 1.5rem;
+  animation: slideIn 0.3s;
+}
+.nav-mobile.open {
+  display: flex;
+}
+@keyframes slideIn {
+  from { left: -100vw; }
+  to { left: 0; }
+}
+.nav-mobile .nav-links {
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  display: flex;
+}
+.nav-mobile .nav-link {
+  font-size: 1.2rem;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 0;
+}
     /* HERO */
     .hero {
       min-height: 100vh;
@@ -785,15 +786,25 @@
     });
 
     // Menu responsivo hamburguer/navio
-    const navHamburger = document.getElementById('navHamburger');
-    const navMobile = document.getElementById('navMobile');
-    navHamburger.addEventListener('click', () => {
-      navMobile.style.display = navMobile.style.display === 'flex' ? 'none' : 'flex';
-    });
-    // Fecha menu mobile ao clicar fora
-    navMobile.addEventListener('click', (e) => {
-      if (e.target === navMobile) navMobile.style.display = 'none';
-    });
+  const navHamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+const navMobileLinks = navMobile.querySelectorAll('.nav-link');
+
+navHamburger.addEventListener('click', () => {
+  navMobile.classList.toggle('open');
+});
+
+// Fecha menu mobile ao clicar fora do menu
+navMobile.addEventListener('click', (e) => {
+  if (e.target === navMobile) navMobile.classList.remove('open');
+});
+
+// Fecha menu mobile ao clicar em qualquer link
+navMobileLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navMobile.classList.remove('open');
+  });
+});
 
     // Popup Dashboards
     const btnPaineis = document.getElementById('btn-paineis');
